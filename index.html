@@ -245,23 +245,29 @@
     background: var(--bg2);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 12px;
+    padding: 10px 8px;
     text-align: center;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .stat-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     color: var(--muted);
     text-transform: uppercase;
     margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .stat-value {
     font-family: 'Syne', sans-serif;
-    font-size: 16px;
+    font-size: clamp(12px, 3.2vw, 15px);
     font-weight: 700;
+    white-space: nowrap;
   }
 
   .green { color: var(--green); }
@@ -399,33 +405,7 @@
   }
   .paid-toggle.paid { background: var(--green-dim); border-color: var(--green); color: var(--green); }
 
-  /* 50/30/20 */
-  .rule-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 14px;
-  }
 
-  .rule-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    margin-bottom: 14px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-
-  .rule-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
-  .rule-bar-wrap { flex: 1; margin: 0 12px; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-  .rule-bar { height: 100%; border-radius: 3px; transition: width 0.3s; }
 
   /* DEBT CARD */
   .debt-card {
@@ -463,10 +443,32 @@
   /* SECTION HEADER */
   .section-title {
     font-family: 'Syne', sans-serif;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
     margin-bottom: 16px;
     padding-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    font-stretch: normal;
+    letter-spacing: normal;
+  }
+
+  .section-title .title-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .section-title .title-text {
+    font-size: 22px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* PARCELA BOX */
@@ -566,7 +568,7 @@
 
 <!-- ===== FIXAS ===== -->
 <section id="fixas" class="active">
-  <div class="section-title">📌 Contas Fixas</div>
+  <div class="section-title"><span class="title-icon">📌</span><span class="title-text">Contas Fixas</span></div>
 
   <div class="info-box">
     Cadastre tudo que paga todo mês — aluguel, streaming, planos, parcelamentos. Elas aparecem automaticamente no orçamento.
@@ -640,7 +642,7 @@
 
 <!-- ===== ORÇAMENTO ===== -->
 <section id="orcamento">
-  <div class="section-title">💰 Orçamento</div>
+  <div class="section-title"><span class="title-icon">💰</span><span class="title-text">Orçamento</span></div>
 
   <!-- Month Nav -->
   <div class="month-nav">
@@ -694,25 +696,7 @@
     <div id="fixas-mes-list"></div>
   </div>
 
-  <!-- 50/30/20 -->
-  <div class="rule-card">
-    <div class="rule-title">REGRA 50/30/20</div>
-    <div class="rule-row">
-      <span style="font-size:13px;color:var(--muted);width:120px">Necessidades (50%)</span>
-      <div class="rule-bar-wrap"><div class="rule-bar" id="rule-nec" style="background:var(--green);width:0%"></div></div>
-      <span class="green" style="font-size:13px;font-weight:700;width:70px;text-align:right" id="rule-nec-val">R$ 0</span>
-    </div>
-    <div class="rule-row">
-      <span style="font-size:13px;color:var(--muted);width:120px">Lazer (30%)</span>
-      <div class="rule-bar-wrap"><div class="rule-bar" id="rule-laz" style="background:var(--yellow);width:0%"></div></div>
-      <span class="yellow" style="font-size:13px;font-weight:700;width:70px;text-align:right" id="rule-laz-val">R$ 0</span>
-    </div>
-    <div class="rule-row">
-      <span style="font-size:13px;color:var(--muted);width:120px">Poupança (20%)</span>
-      <div class="rule-bar-wrap"><div class="rule-bar" id="rule-pou" style="background:var(--blue);width:0%"></div></div>
-      <span class="blue" style="font-size:13px;font-weight:700;width:70px;text-align:right" id="rule-pou-val">R$ 0</span>
-    </div>
-  </div>
+
 
   <!-- Variable expense form -->
   <div class="form-card">
@@ -763,7 +747,7 @@
 
 <!-- ===== DÍVIDAS ===== -->
 <section id="dividas">
-  <div class="section-title">💳 Dívidas</div>
+  <div class="section-title"><span class="title-icon">💳</span><span class="title-text">Dívidas</span></div>
 
   <div class="info-box">
     💡 As dívidas são contínuas — acompanhe o progresso aqui, independente do mês.
@@ -821,7 +805,7 @@
 
 <!-- ===== METAS ===== -->
 <section id="metas">
-  <div class="section-title">🎯 Metas</div>
+  <div class="section-title"><span class="title-icon">🎯</span><span class="title-text">Metas</span></div>
 
   <div class="info-box">
     💡 Veja quanto guardar por mês para atingir cada objetivo.
@@ -1122,19 +1106,7 @@ function renderOrcamento() {
   saldoEl.textContent = fmt(saldo);
   saldoEl.className = 'stat-value ' + (saldo >= 0 ? 'green' : 'red');
 
-  // 50/30/20
-  const nec = renda * 0.5;
-  const laz = renda * 0.3;
-  const pou = renda * 0.2;
-  document.getElementById('rule-nec-val').textContent = fmt(nec);
-  document.getElementById('rule-laz-val').textContent = fmt(laz);
-  document.getElementById('rule-pou-val').textContent = fmt(pou);
-  const necPct = renda > 0 ? Math.min(100, (fixasTotal / nec) * 100) : 0;
-  const lazPct = renda > 0 ? Math.min(100, (varTotal / laz) * 100) : 0;
-  const pouPct = renda > 0 ? Math.min(100, (saldo / pou) * 100) : 0;
-  document.getElementById('rule-nec').style.width = necPct + '%';
-  document.getElementById('rule-laz').style.width = lazPct + '%';
-  document.getElementById('rule-pou').style.width = pouPct + '%';
+
 
   // Variaveis list
   const vList = document.getElementById('variaveis-list');
